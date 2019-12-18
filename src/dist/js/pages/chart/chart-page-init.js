@@ -4,8 +4,8 @@
    // ==============================================================
     // Real Time Visits
     // ==============================================================
-    var data = [5, 10, 15, 20, 15, 30, 40],
-        totalPoints = 100;
+    var data = [],
+        totalPoints = 0;
 
     function getRandomData() {
         if (data.length > 0) data = data.slice(1);

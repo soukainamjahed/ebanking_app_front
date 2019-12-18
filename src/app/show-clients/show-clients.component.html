@@ -1,0 +1,131 @@
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h4 class="page-title">Liste Clients </h4>
+      <div class="ml-auto text-right">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">Manager Client</li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="#">All Clients</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-top: 30px">
+  <div class="row">
+    <div class="col-md-6 col-lg-2 col-xlg-3">
+      <div (click)="gotopage()" class="card card-hover">
+        <div class="box bg-cyan text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+          <h6 class="text-white">Dashboard</h6>
+        </div>
+      </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-success text-center">
+          <h1 class="font-light text-white"><i class="zmdi zmdi-money-box"></i></h1>
+          <h6 class="text-white">Recharger un compte</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-2 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-danger text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-playlist-minus"></i></h1>
+          <h6 class="text-white">Retrait Clients</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-2 col-xlg-3">
+      <div routerLink="/show_clients" class="card card-hover">
+        <div class="box bg-primary text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+          <h6 class="text-white">Show Clients</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-warning text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-pencil"></i></h1>
+          <h6 class="text-white">New Client</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="margin-top: -10px;" [ngStyle]="{'height' : height + 'px'}">
+  <div class="row">
+    <div class="col-12">
+      <div class="search-div">
+        <button style="margin-right: 10px;padding: 15px 15px;" mat-raised-button>
+          <mat-icon>add</mat-icon> Create New Client
+        </button>
+        <button mat-raised-button style="background-color: #fff;width: 70%">
+          <mat-form-field style="width: 100%" class="search-form-field" floatLabel="never">
+            <input matInput [(ngModel)]="searchKey" placeholder="search" autocomplete="off" (keyup)="applyFilter()">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onsearchClear()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </button>
+      </div>
+      <div class="wrapper">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+          <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
+            <td mat-cell *matCellDef="let element"> {{element?.firstname}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last name </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element?.email}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Address">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+            <td mat-cell *matCellDef="let element"> {{element?.adress}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Phone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+            <td mat-cell *matCellDef="let element">(+212) {{element?.numtel}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Creation_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation date </th>
+            <td mat-cell *matCellDef="let element"> {{element?.createdDate[2]}}/{{element?.createdDate[1]}}/{{element?.createdDate[0]}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="Active">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+            <td mat-cell *matCellDef="let element"> {{element?.isValid?'Oui':'Non'}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row (click)="getRecord(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <!-- Angular 8 pagination -->
+        <mat-paginator [pageSizeOptions]="[10, 5]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+<footer style="position: relative;right: 10px;" class="footer text-right">
+  All Rights Reserved by Atlas Team. Designed and Developed by <a href="#">Projet team</a>.
+</footer>

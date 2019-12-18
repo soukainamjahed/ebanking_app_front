@@ -11,7 +11,9 @@ import * as $ from 'jquery';
 export class AppComponent {
   title = 'ebankingfront';
   private isConnected: boolean;
+  height: number = $(window).height() - 64;
   constructor(private authService:AuthService,private router:Router) {
+    console.log(this.height);
       this.authService.authenticationState.subscribe(state=> {
         this.isConnected = state;
         let url = window.location.href;
@@ -19,11 +21,11 @@ export class AppComponent {
         console.log("current_page", window.location.href);
         if(state){
           if((url.indexOf('login')>0 || url.indexOf('forgot_password')>0)){
-            this.router.navigateByUrl('/home')
+            //this.router.navigateByUrl('/home')
           }
         }else{
-          if((url.indexOf('login')==0 && url.indexOf('forgot_password')==0)){
-            this.router.navigateByUrl('/login')
+          if(url.indexOf('login')==-1 && url.indexOf('forgot_password')==-1){
+            //this.router.navigateByUrl('/login')
           }
         }
       });

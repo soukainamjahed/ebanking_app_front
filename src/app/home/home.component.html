@@ -1,1 +1,139 @@
-<p>home works!</p>
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h4 class="page-title">Dashboard </h4>
+      <div class="ml-auto text-right">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">Manager Client</li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="#">Dashboard</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-top: 30px">
+  <div class="row">
+    <div class="col-md-6 col-lg-2 col-xlg-3">
+      <div  routerLink="/home" class="card card-hover">
+        <div class="box bg-cyan text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+          <h6 class="text-white">Dashboard</h6>
+        </div>
+      </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-success text-center">
+          <h1 class="font-light text-white"><i class="zmdi zmdi-money-box"></i></h1>
+          <h6 class="text-white">Recharger un compte</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-2 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-danger text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-playlist-minus"></i></h1>
+          <h6 class="text-white">Retrait Clients</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-2 col-xlg-3">
+      <div routerLink="/show_clients" class="card card-hover">
+        <div class="box bg-primary text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+          <h6 class="text-white">Show Clients</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-warning text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-pencil"></i></h1>
+          <h6 class="text-white">New Client</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h4 class="page-title">Statistiques </h4>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-top: 30px">
+  <div class="row">
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-dark text-center">
+          <h1 class="font-light text-white">
+            <i class="fa fa-user m-b-5 font-18"></i>
+          </h1>
+          <h6 class="text-white">{{data?.totalClient}}</h6>
+          <h6 class="text-white">Total Clients</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-cyan text-center">
+          <h1 class="font-light text-white">
+            <i class="fas fa-university m-b-5 font-18"></i>
+          </h1>
+          <h6 class="text-white">{{data?.totalAgences}}</h6>
+          <h6 class="text-white">Total Agences</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-info text-center">
+          <h1 class="font-light text-white">
+            <i class="far fa-money-bill-alt m-b-5 font-18"></i>
+          </h1>
+          <h6 class="text-white">{{data?.tauxDeChange}} DHS</h6>
+          <h6 class="text-white">Taux de change dhs</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-purple text-center">
+          <h1 class="font-light text-white">
+            <i class="far fa-money-bill-alt m-b-5 font-18"></i>
+          </h1>
+          <h6 class="text-white">{{data?.commissionTransfert}} DHS</h6>
+          <h6 class="text-white">Commission transfert</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Users recement entré pendant l'année</h5>
+          <div class="bars" style="height: 400px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer style="position: relative;right: 10px;" class="footer text-right">
+  All Rights Reserved by Atlas Team. Designed and Developed by <a href="#">Projet team</a>.
+</footer>

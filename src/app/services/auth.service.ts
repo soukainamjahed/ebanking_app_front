@@ -18,10 +18,20 @@ export class AuthService {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
       });
-
       this.apiService.post('/login', user, { headers }).then(data => {
-        this.storeUser(data);
-        resolve(data);
+        let roles  = data.user.roles;
+        console.log("avant verification");
+        this.verifyRole(roles).then(resp=>{
+          console.log("apres verification");
+          console.log("reponse",resp);
+          if(resp){
+            this.storeUser(data);
+            resolve(data);
+          }else{
+            reject();
+          }
+        })
+
       }).catch(err => {
         reject(err);
       });
@@ -79,5 +89,14 @@ export class AuthService {
     }else{
       this.authenticationState.next(false);
     }
+  }
+
+  private async verifyRole(roles: any) {
+    for(let i = 0; i < roles.length ; i++){
+      if(roles[i].role == "ROLE_CLIENT_MANAGER"){
+        return true
+      }
+    }
+    return false;
   }
 }

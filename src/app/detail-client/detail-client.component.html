@@ -1,0 +1,224 @@
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h4 class="page-title">Detail Client </h4>
+      <div class="ml-auto text-right">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">Manager Client</li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="#">Detail client</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-top: 30px">
+  <div class="row">
+    <div class="col-md-6 col-lg-2 col-xlg-3">
+      <div (click)="gotopage()" class="card card-hover">
+        <div class="box bg-cyan text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+          <h6 class="text-white">Dashboard</h6>
+        </div>
+      </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-success text-center">
+          <h1 class="font-light text-white"><i class="zmdi zmdi-money-box"></i></h1>
+          <h6 class="text-white">Recharger un compte</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-2 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-danger text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-playlist-minus"></i></h1>
+          <h6 class="text-white">Retrait Clients</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-2 col-xlg-3">
+      <div routerLink="/show_clients" class="card card-hover">
+        <div class="box bg-primary text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+          <h6 class="text-white">Show Clients</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-warning text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-pencil"></i></h1>
+          <h6 class="text-white">New Client</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row el-element-overlay">
+    <div class="col-lg-3 col-md-6"></div>
+    <div class="col-lg-3 col-md-6" *ngFor="let img of images">
+      <div class="card">
+        <div class="el-card-item">
+          <div class="el-card-avatar el-overlay-1"> <img [src]="img.url" alt="user" />
+            <div class="el-overlay">
+              <ul class="list-style-none el-info">
+                <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" [href]="img.url"><i class="mdi mdi-magnify-plus"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <form class="form-horizontal">
+          <div class="card-body">
+            <div style="display: flex">
+              <h4 class="card-title" style="width: 50%">Infos personnelles</h4>
+                <a class="m-b-0 font-medium p-0 text-right" id="update" (click)="updateUser()" style="width: 50%">
+                  <i class=" fas fa-pencil-alt w-30px m-t-5"></i>
+                  Update user
+                </a>
+            </div>
+            <div class="form-group row">
+              <label for="fname" class="col-sm-3 text-left control-label col-form-label">First Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="fname" [disabled]="!showUpdateUserUtil" placeholder="First Name Here" [(ngModel)]="client.firstname" name="firstname">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="lname" class="col-sm-3 text-left control-label col-form-label">Last Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="lname" [disabled]="!showUpdateUserUtil" placeholder="Last Name Here" [(ngModel)]="client.lastname" name="lastname">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email1" class="col-sm-3 text-left control-label col-form-label">Email</label>
+              <div class="col-sm-9">
+                <input type="email" [disabled]="true" class="form-control" id="email1" placeholder="Email right here" [(ngModel)]="client.email" name="email">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cono1" class="col-sm-3 text-left control-label col-form-label">Address</label>
+              <div class="col-sm-9">
+                <input type="text" [disabled]="!showUpdateUserUtil" class="form-control" id="cono1" placeholder="Address Here" [(ngModel)]="client.address" name="address">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cono1" class="col-sm-3 text-left control-label col-form-label">Phone</label>
+              <div class="col-sm-9">
+                <input type="text" [disabled]="!showUpdateUserUtil" class="form-control phone-inputmask" id="phone-mask" placeholder="Phone Number" [(ngModel)]="client.phone" name="phone">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cono1" class="col-sm-3 text-left control-label col-form-label">Creation date</label>
+              <div class="col-sm-9">
+                <input type="text" [disabled]="true" class="form-control" id="cono1" placeholder="Creation date here" [(ngModel)]="client.creation_date" name="creation_date">
+              </div>
+            </div>
+          </div>
+          <div [hidden]="!showUpdateUserUtil" class="border-top">
+            <div class="card-body">
+              <button type="button" class="btn btn-md btn-primary" (click)="updateClient()">Update client</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <form class="form-horizontal">
+          <div class="card-body">
+            <div style="display: flex">
+              <h4 class="card-title" style="width: 50%">Infos Accounts</h4>
+              <a class="m-b-0 font-medium p-0 text-right" id="update" data-toggle="modal" data-target="#exampleModal" style="width: 50%">
+                <i class=" fa fa-plus w-30px m-t-5"></i>
+                Add Account
+              </a>
+            </div>
+            <div class="accordion" id="accordionExample">
+              <div class="card m-b-0 border-top" *ngFor="let acc of accounts">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <i class="m-r-5  far fa-credit-card" aria-hidden="true"></i>
+                      <span> {{acc?.rib}}</span>
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <div class="comment-text w-100">
+                      <div style="display: flex;">
+                        <h6 class="font-medium" style="width: 50%">Balance : {{acc?.balance}}</h6>
+                        <h6 class="font-medium" style="width: 50%">Blocked balance : {{acc?.blockedbalance}}</h6>
+                      </div>
+                      <div style="display: flex">
+                        <h6 class="font-medium" style="width: 50%;">Type account : {{acc?.typeaccount}}</h6>
+                        <h6 *ngIf="acc?.accountvalidated" class="font-medium text-success" style="width: 50%;">is active</h6>
+                        <h6 *ngIf="!acc?.accountvalidated" class="font-medium text-danger" style="width: 50%;">is Not active</h6>
+                      </div>
+                      <div style="display: flex;">
+                        <h6 class="font-medium" style="width: 50%">Activation date : {{toDate(acc?.activation_date)}}</h6>
+                        <h6 *ngIf="acc.desactivation_date == null" class="font-medium" style="width: 50%">Desactivation date : none</h6>
+                        <h6 *ngIf="acc.desactivation_date != null" class="font-medium" style="width: 50%">Desactivation date : {{toDate(acc?.desactivation_date)}}</h6>
+                      </div>
+                      <div class="comment-footer" style="margin-top: 10px">
+                        <button style="padding: 10px" type="button" class="btn btn-cyan btn-md" (click)="rechargeAcccount(acc.id)">Recharger</button>
+                        <button style="margin-left: 10px;padding: 10px" type="button" class="btn btn-success btn-md" (click)="retreatAccount(acc.id)">Retrait</button>
+                        <button *ngIf="acc.accountvalidated" style="margin-left: 10px;padding: 10px" type="button" class="btn btn-danger btn-md" (click)="desactivateAccount(acc.id)">Desactiver</button>
+                        <button *ngIf="!acc.accountvalidated" style="margin-left: 10px;padding: 10px" type="button" class="btn btn-success btn-md" (click)="activateAccount(acc.id)">Desactiver</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Account to {{client.firstname}} {{client.lastname}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label for="fname" class="col-sm-3 text-left control-label col-form-label">Type Account</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="fname" placeholder="First Name Here">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<footer style="position: relative;right: 10px;" class="footer text-right">
+  All Rights Reserved by Atlas Team. Designed and Developed by <a href="#">Projet team</a>.
+</footer>
