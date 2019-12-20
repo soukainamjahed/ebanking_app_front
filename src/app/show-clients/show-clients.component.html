@@ -16,7 +16,7 @@
 
 <div class="container-fluid" style="margin-top: 30px">
   <div class="row">
-    <div class="col-md-6 col-lg-2 col-xlg-3">
+    <div class="col-md-6 col-lg-4 col-xlg-3">
       <div (click)="gotopage()" class="card card-hover">
         <div class="box bg-cyan text-center">
           <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
@@ -24,26 +24,8 @@
         </div>
       </div>
     </div>
-    <!-- Column -->
-    <div class="col-md-6 col-lg-3 col-xlg-3">
-      <div class="card card-hover">
-        <div class="box bg-success text-center">
-          <h1 class="font-light text-white"><i class="zmdi zmdi-money-box"></i></h1>
-          <h6 class="text-white">Recharger un compte</h6>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-md-6 col-lg-2 col-xlg-3">
-      <div class="card card-hover">
-        <div class="box bg-danger text-center">
-          <h1 class="font-light text-white"><i class="mdi mdi-playlist-minus"></i></h1>
-          <h6 class="text-white">Retrait Clients</h6>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-lg-2 col-xlg-3">
+    <div class="col-md-6 col-lg-4 col-xlg-3">
       <div routerLink="/show_clients" class="card card-hover">
         <div class="box bg-primary text-center">
           <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
@@ -52,8 +34,8 @@
       </div>
     </div>
 
-    <div class="col-md-6 col-lg-3 col-xlg-3">
-      <div class="card card-hover">
+    <div class="col-md-6 col-lg-4 col-xlg-3">
+      <div class="card card-hover" routerLink="/new_client">
         <div class="box bg-warning text-center">
           <h1 class="font-light text-white"><i class="mdi mdi-pencil"></i></h1>
           <h6 class="text-white">New Client</h6>
@@ -62,11 +44,13 @@
     </div>
   </div>
 </div>
+
+
 <div class="container-fluid" style="margin-top: -10px;" [ngStyle]="{'height' : height + 'px'}">
   <div class="row">
     <div class="col-12">
       <div class="search-div">
-        <button style="margin-right: 10px;padding: 15px 15px;" mat-raised-button>
+        <button routerLink="/new_client" style="margin-right: 10px;padding: 15px 15px;" mat-raised-button>
           <mat-icon>add</mat-icon> Create New Client
         </button>
         <button mat-raised-button style="background-color: #fff;width: 70%">

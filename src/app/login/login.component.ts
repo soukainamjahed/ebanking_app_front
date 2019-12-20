@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       this.rememberMe.nativeElement.checked ? localStorage.setItem('rememberMe', "1") : localStorage.setItem('rememberMe', "0");
       console.log(resp);
       $('.preloader').fadeOut();
-      this.router.navigateByUrl('/home')
+      window.location.href = "http://localhost:4200/home";
     }).catch(err => {
       $('.preloader').fadeOut();
       Swal.fire({

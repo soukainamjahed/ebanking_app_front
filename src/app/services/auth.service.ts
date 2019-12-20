@@ -99,4 +99,9 @@ export class AuthService {
     }
     return false;
   }
+
+  isAuthenticated(){
+    return this.authenticationState.value;
+  }
+
 }

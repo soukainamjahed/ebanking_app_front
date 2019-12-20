@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule} from '@angular/material';
 import { DetailClientComponent } from './detail-client/detail-client.component';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { NewClientComponent } from './new-client/new-client.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { DetailClientComponent } from './detail-client/detail-client.component';
     LoginComponent,
     ForgotPasswordComponent,
     ShowClientsComponent,
-    DetailClientComponent
+    DetailClientComponent,
+    NewClientComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { DetailClientComponent } from './detail-client/detail-client.component';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    GooglePlaceModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -20,14 +20,20 @@ export class AppComponent {
         console.log("user connected ? ", state);
         console.log("current_page", window.location.href);
         if(state){
-          if((url.indexOf('login')>0 || url.indexOf('forgot_password')>0)){
-            //this.router.navigateByUrl('/home')
-          }
+          this.router.navigateByUrl("/home")
         }else{
-          if(url.indexOf('login')==-1 && url.indexOf('forgot_password')==-1){
-            //this.router.navigateByUrl('/login')
-          }
+          this.router.navigateByUrl("/login")
         }
       });
+  }
+
+  gotopage() {
+    window.location.href = 'http://localhost:4200/home';
+  }
+
+  logout() {
+    localStorage.setItem("user",null);
+    localStorage.setItem('token',null);
+    this.authService.authenticationState.next(false);
   }
 }

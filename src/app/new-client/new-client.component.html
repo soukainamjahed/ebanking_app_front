@@ -1,0 +1,122 @@
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h4 class="page-title">New Client </h4>
+      <div class="ml-auto text-right">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">Manager Client</li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="#">New client</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-top: 30px">
+  <div class="row">
+    <div class="col-md-6 col-lg-4 col-xlg-3">
+      <div (click)="gotopage()" class="card card-hover">
+        <div class="box bg-cyan text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+          <h6 class="text-white">Dashboard</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 col-xlg-3">
+      <div routerLink="/show_clients" class="card card-hover">
+        <div class="box bg-primary text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+          <h6 class="text-white">Show Clients</h6>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 col-xlg-3">
+      <div class="card card-hover" routerLink="/new_client">
+        <div class="box bg-warning text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-pencil"></i></h1>
+          <h6 class="text-white">New Client</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" [ngSwitch]="register">
+        <form class="form-horizontal" [formGroup]="subscribtionForm" (ngSubmit)="addClient()">
+          <div class="card-body">
+            <div style="display: flex">
+              <h4 class="card-title" style="width: 50%">Infos personnelles</h4>
+            </div>
+            <div class="form-group row">
+              <label for="fname" class="col-sm-3 text-left control-label col-form-label">First Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="fname"  placeholder="First Name Here" [(ngModel)]="client.firstname"  formControlName="firstname">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="lname" class="col-sm-3 text-left control-label col-form-label">Last Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="lname" placeholder="Last Name Here" [(ngModel)]="client.lastname"  formControlName="lastname">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email1" class="col-sm-3 text-left control-label col-form-label">Email</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" id="email1" placeholder="Email right here" [(ngModel)]="client.email"  formControlName="email">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cono1" class="col-sm-3 text-left control-label col-form-label">Address</label>
+              <div class="col-sm-9">
+                <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" class="form-control"
+                       placeholder="Address Here" (onAddressChange)="handleAddressChange($event)" [(ngModel)]="client.address" formControlName="address"/>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cono1" class="col-sm-3 text-left control-label col-form-label">Phone</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control phone-inputmask" id="phone-mask" placeholder="Phone Number" [(ngModel)]="client.phone"  formControlName="phone">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3"><div style="display: flex;height: 100%;position: relative;bottom: -8px;">Copie recto Carte nationnal</div></label>
+              <div class="col-md-9">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="validatedCustomFile1" name="image" (change)="fileProgress($event,'recto')"  required="">
+                  <label class="custom-file-label" id="image1" for="validatedCustomFile1">Choose file...</label>
+                  <div class="invalid-feedback">Example invalid custom file feedback</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3"><div style="display: flex;height: 100%;position: relative;bottom: -8px;">Copie verso Carte nationnal</div></label>
+              <div class="col-md-9">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="validatedCustomFile2" name="image" (change)="fileProgress($event,'verso')" required="">
+                  <label class="custom-file-label" id="image2" for="validatedCustomFile2">Choose file...</label>
+                  <div class="invalid-feedback">Example invalid custom file feedback</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-top">
+            <div class="card-body">
+              <button type="submit" class="btn btn-md btn-primary">Create client</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="position: relative;right: 10px;" class="footer text-right">
+  All Rights Reserved by Atlas Team. Designed and Developed by <a href="#">Projet team</a>.
+</footer>

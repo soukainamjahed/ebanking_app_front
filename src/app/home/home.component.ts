@@ -23,5 +23,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
+  gotopage() {
+    window.location.href = 'http://localhost:4200/home';
+  }
 }

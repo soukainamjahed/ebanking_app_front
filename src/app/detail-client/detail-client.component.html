@@ -16,7 +16,7 @@
 
 <div class="container-fluid" style="margin-top: 30px">
   <div class="row">
-    <div class="col-md-6 col-lg-2 col-xlg-3">
+    <div class="col-md-6 col-lg-4 col-xlg-3">
       <div (click)="gotopage()" class="card card-hover">
         <div class="box bg-cyan text-center">
           <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
@@ -24,26 +24,8 @@
         </div>
       </div>
     </div>
-    <!-- Column -->
-    <div class="col-md-6 col-lg-3 col-xlg-3">
-      <div class="card card-hover">
-        <div class="box bg-success text-center">
-          <h1 class="font-light text-white"><i class="zmdi zmdi-money-box"></i></h1>
-          <h6 class="text-white">Recharger un compte</h6>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-md-6 col-lg-2 col-xlg-3">
-      <div class="card card-hover">
-        <div class="box bg-danger text-center">
-          <h1 class="font-light text-white"><i class="mdi mdi-playlist-minus"></i></h1>
-          <h6 class="text-white">Retrait Clients</h6>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-lg-2 col-xlg-3">
+    <div class="col-md-6 col-lg-4 col-xlg-3">
       <div routerLink="/show_clients" class="card card-hover">
         <div class="box bg-primary text-center">
           <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
@@ -52,8 +34,8 @@
       </div>
     </div>
 
-    <div class="col-md-6 col-lg-3 col-xlg-3">
-      <div class="card card-hover">
+    <div class="col-md-6 col-lg-4 col-xlg-3">
+      <div class="card card-hover" routerLink="/new_client">
         <div class="box bg-warning text-center">
           <h1 class="font-light text-white"><i class="mdi mdi-pencil"></i></h1>
           <h6 class="text-white">New Client</h6>
@@ -116,7 +98,8 @@
             <div class="form-group row">
               <label for="cono1" class="col-sm-3 text-left control-label col-form-label">Address</label>
               <div class="col-sm-9">
-                <input type="text" [disabled]="!showUpdateUserUtil" class="form-control" id="cono1" placeholder="Address Here" [(ngModel)]="client.address" name="address">
+                <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" [disabled]="!showUpdateUserUtil" class="form-control"
+                       placeholder="Address Here" (onAddressChange)="handleAddressChange($event)" [(ngModel)]="client.address" name="address"/>
               </div>
             </div>
             <div class="form-group row">
@@ -155,18 +138,18 @@
               <div class="card m-b-0 border-top" *ngFor="let acc of accounts">
                 <div class="card-header" id="headingOne">
                   <h5 class="mb-0">
-                    <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <a data-toggle="collapse" [attr.data-target]="'#collapse' + acc.id" [attr.aria-controls]="'#collapse' + acc.id" aria-expanded="false">
                       <i class="m-r-5  far fa-credit-card" aria-hidden="true"></i>
                       <span> {{acc?.rib}}</span>
                     </a>
                   </h5>
                 </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div [id]="'collapse' + acc.id" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div class="card-body">
                     <div class="comment-text w-100">
                       <div style="display: flex;">
-                        <h6 class="font-medium" style="width: 50%">Balance : {{acc?.balance}}</h6>
-                        <h6 class="font-medium" style="width: 50%">Blocked balance : {{acc?.blockedbalance}}</h6>
+                        <h6 class="font-medium" style="width: 50%">Balance : {{acc?.balance}} DHS</h6>
+                        <h6 class="font-medium" style="width: 50%">Blocked balance : {{acc?.blockedbalance}} DHS</h6>
                       </div>
                       <div style="display: flex">
                         <h6 class="font-medium" style="width: 50%;">Type account : {{acc?.typeaccount}}</h6>
@@ -179,10 +162,10 @@
                         <h6 *ngIf="acc.desactivation_date != null" class="font-medium" style="width: 50%">Desactivation date : {{toDate(acc?.desactivation_date)}}</h6>
                       </div>
                       <div class="comment-footer" style="margin-top: 10px">
-                        <button style="padding: 10px" type="button" class="btn btn-cyan btn-md" (click)="rechargeAcccount(acc.id)">Recharger</button>
-                        <button style="margin-left: 10px;padding: 10px" type="button" class="btn btn-success btn-md" (click)="retreatAccount(acc.id)">Retrait</button>
-                        <button *ngIf="acc.accountvalidated" style="margin-left: 10px;padding: 10px" type="button" class="btn btn-danger btn-md" (click)="desactivateAccount(acc.id)">Desactiver</button>
-                        <button *ngIf="!acc.accountvalidated" style="margin-left: 10px;padding: 10px" type="button" class="btn btn-success btn-md" (click)="activateAccount(acc.id)">Desactiver</button>
+                        <button *ngIf="acc.accountvalidated" style="padding: 10px" type="button" class="btn btn-cyan btn-md" data-toggle="modal" data-target="#rechargeAccount" (click)="clickRechargeButton(acc.rib)">Recharger</button>
+                        <button *ngIf="acc.accountvalidated" style="margin-left: 10px;padding: 10px" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#retraitAccount" (click)="clickRechargeButton(acc.rib)">Retrait</button>
+                        <button *ngIf="acc.accountvalidated" style="margin-left: 10px;padding: 10px" type="button" class="btn btn-danger btn-md" (click)="desactivateAccount(acc.rib)">Desactiver</button>
+                        <button *ngIf="!acc.accountvalidated" style="margin-left: 10px;padding: 10px" type="button" class="btn btn-danger btn-md" (click)="activateAccount(acc.rib)">Activer</button>
                       </div>
                     </div>
                   </div>
@@ -208,17 +191,86 @@
         <div class="form-group row">
           <label for="fname" class="col-sm-3 text-left control-label col-form-label">Type Account</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="fname" placeholder="First Name Here">
+              <select class="select2 form-control custom-select select2-hidden-accessible" style="width: 100%; height:36px;"
+                      data-select2-id="1" tabindex="-1" aria-hidden="true" [(ngModel)]="account.typecontrat">
+                  <option *ngFor="let cont of contrats" [value]="cont.name">{{cont.name}}</option>
+              </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cono1" class="col-sm-3 text-left control-label col-form-label">Balance (DHS)</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="cono1" placeholder="balance here" [(ngModel)]="account.balance" name="balance">
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="addAccount()">Creer le compte</button>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="rechargeAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Recharger le compte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label for="cono1" class="col-sm-3 text-left control-label col-form-label">RIB</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" disabled id="cono1" placeholder="balance here" [(ngModel)]="recharge.rib" name="balance">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cono1" class="col-sm-3 text-left control-label col-form-label">Somme (DHS)</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="cono1" placeholder="balance here" [(ngModel)]="recharge.somme" name="balance">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="rechargeAccount()">Recharger compte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="retraitAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Retrait du compte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label for="cono1" class="col-sm-3 text-left control-label col-form-label">RIB</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" disabled id="cono1" placeholder="balance here" [(ngModel)]="recharge.rib" name="balance">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cono1" class="col-sm-3 text-left control-label col-form-label">Somme (DHS)</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="cono1" placeholder="balance here" [(ngModel)]="recharge.somme" name="balance">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="retreatAccount()">Retrait compte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer style="position: relative;right: 10px;" class="footer text-right">
   All Rights Reserved by Atlas Team. Designed and Developed by <a href="#">Projet team</a>.
 </footer>
